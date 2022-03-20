@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+    apache_server:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        container_name: klaxoon_apache_server
+        ports:
+        -   "9080:80"
+        volumes:
+        -   "./:/var/www/klaxoon"
+
+    mysql:
+        image: mysql:5.7
+        container_name: klaxoon_mysql_server
+        ports:
+            - "9306:3306"
+        environment:
+            MYSQL_DATABASE: symfony
+            MYSQL_ROOT_PASSWORD:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
