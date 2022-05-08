@@ -9,7 +9,12 @@
         "ext-iconv": "*",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.12",
+        "embed/embed": "^4.4",
+        "guzzlehttp/psr7": "^2.2",
+        "laminas/laminas-diactoros": "^2.10",
+        "nyholm/psr7": "^1.5",
         "sensio/framework-extra-bundle": "^6.2",
+        "sunrise/http-message": "^2.0",
         "symfony/apache-pack": "^1.0",
         "symfony/console": "5.4.*",
         "symfony/dotenv": "5.4.*",
@@ -65,5 +70,9 @@
             "allow-contrib": false,
             "require": "5.4.*"
         }
+    },
+    "require-dev": {
+        "symfony/stopwatch": "5.4.*",
+        "symfony/web-profiler-bundle": "5.4.*"
     }
 }
