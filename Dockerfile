@@ -60,7 +60,9 @@ RUN docker-php-ext-install zip && \
     docker-php-ext-install -j$(nproc) intl && \
     docker-php-ext-install gettext && \
     docker-php-ext-install exif && \
-    docker-php-ext-install sockets
+    docker-php-ext-install sockets && \
+    docker-php-ext-install mysqli && \
+    docker-php-ext-install pdo_mysql
 
 # Cleanup
 RUN rm -rf /usr/src/*
