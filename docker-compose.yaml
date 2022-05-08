@@ -9,6 +9,7 @@ services:
         -   "9080:80"
         volumes:
         -   "./:/var/www/klaxoon"
+        -   "./apache-conf/klaxoon-api.conf:/etc/apache2/sites-available/klaxoon-api.conf"
 
     mysql:
         image: mysql:5.7
