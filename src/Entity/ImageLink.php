@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ImageLinkRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ImageLinkRepository::class)
@@ -19,13 +20,24 @@ class ImageLink extends Link
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"main"})
      */
     private $width;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"main"})
      */
     private $height;
+
+    public function __construct(?array $data){
+        parent::__construct($data);
+
+        if(!empty($data)){
+            $this->width = $data['width'];
+            $this->height = $data['height'];
+        }
+    }
 
     public function getId(): ?int
     {

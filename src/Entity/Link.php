@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\LinkRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=LinkRepository::class)
@@ -22,38 +23,56 @@ class Link
 
     /**
      * @ORM\Column(type="string", length=350)
+     * @Groups({"main"})
      */
     private $url;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"main"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"main"})
      */
     private $author;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"main"})
      */
-    private $dateCreation;
+    private $creationDate;
 
     /**
-     * @ORM\Column(type="datetime", length=350)
+     * @ORM\Column(type="datetime", length=350, nullable=true)
+     * @Groups({"main"})
      */
     private $publishingDate;
 
     /**
      * @ORM\ManyToOne(targetEntity=LinkType::class, inversedBy="links")
+     * @Groups({"main"})
      */
     private $type;
 
     /**
      * @ORM\ManyToOne(targetEntity=Provider::class, inversedBy="links")
+     * @Groups({"main"})
      */
     private $provider;
+
+    public function __construct(?array $data)
+    {
+        if(!empty($data)){
+            $this->url = $data['original_url'];
+            $this->title = $data['title'];
+            $this->author = $data['author_name'];
+            $this->creationDate = new \DateTimeImmutable();
+            $this->publishingDate = isset($data['upload_date']) ? new \DateTime($data['upload_date']) : null;
+        }
+    }
 
     public function getId(): ?int
     {
@@ -97,14 +116,14 @@ class Link
         return $this;
     }
 
-    public function getDateCreation(): \DateTimeInterface
+    public function getCreationDate(): \DateTimeInterface
     {
-        return $this->dateCreation;
+        return $this->creationDate;
     }
 
-    public function setDateCreation(\DateTimeInterface $dateCreation): self
+    public function setCreationDate(\DateTimeInterface $creationDate): self
     {
-        $this->dateCreation = $dateCreation;
+        $this->creationDate = $creationDate;
 
         return $this;
     }

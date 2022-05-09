@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\VideoLinkRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=VideoLinkRepository::class)
@@ -19,18 +20,31 @@ class VideoLink extends Link
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"main"})
      */
     private $width;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"main"})
      */
     private $height;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"main"})
      */
     private $duration;
+
+    public function __construct(?array $data){
+        parent::__construct($data);
+
+        if(!empty($data)){
+            $this->width = $data['width'];
+            $this->height = $data['height'];
+            $this->duration = $data['duration'] ?? null;
+        }
+    }
 
     public function getId(): ?int
     {
