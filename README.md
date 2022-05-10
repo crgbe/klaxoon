@@ -4,4 +4,4 @@ Klaxoon project
 docker-compose up
 
 2- Pour interroger l'API avec curl par exemple il faut s'adresser à cette url:
-http://klaxoon-api.localhost:9080/index.php
+http://klaxoon-api.localhost:9080/api/skills en GET, POST et DELETE
